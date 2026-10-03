@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Space Quiz Master - 3 Player</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div id="app">
+
+        <!-- ================= WELCOME SCREEN ================= -->
+        <section class="screen welcome-screen">
+            <div class="card welcome-card">
+                <div class="logo">🚀</div>
+                <div class="eyebrow">3-PLAYER SPACE QUIZ</div>
+                <h1>Quiz Master</h1>
+                <p class="subtitle">Space & Astronomy Questions</p>
+
+                <div class="feature-grid">
+                    <div>
+                        <strong>10</strong>
+                        <span>Random Questions</span>
+                    </div>
+                    <div>
+                        <strong>3</strong>
+                        <span>Players</span>
+                    </div>
+                    <div>
+                        <strong>10s</strong>
+                        <span>Per Question</span>
+                    </div>
+                </div>
+
+                <button class="btn primary" id="start-btn">Start Quiz</button>
+                <div class="small">3-PLAYER SPACE QUIZ connected to Raspberry Pi hardware .</div>
+            </div>
+        </section>
+
+        <!-- ================= QUIZ SCREEN ================= -->
+        <section class="screen quiz-screen" style="display: none;">
+            <div class="overlay"></div>
+
+            <div class="topbar">
+                <div class="brand">🚀 <span>Quiz Master</span></div>
+
+                <div class="progress-info">
+                    <strong>Question <span id="current-q">1</span> / <span id="total-q">10</span></strong>
+                    <div class="progress">
+                        <i id="progress-bar" style="width: 10%;"></i>
+                    </div>
+                </div>
+
+                <div class="timer" id="timer">15s</div>
+            </div>
+
+            <div class="question-card">
+                <!-- QUESTION IMAGE CONTAINER -->
+                <div class="question-image-container">
+                    <img id="question-img" src="https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?auto=format&fit=crop&w=1200&q=80" alt="Question Image">
+                </div>
+
+                <div class="question-tag">SPACE QUIZ</div>
+                <h1 id="question-text">Which is the hottest planet in our Solar System?</h1>
+
+                <div class="players-grid">
+
+                    <!-- Player 1 Panel -->
+                    <div class="player-panel" id="player-1-panel">
+                        <div class="player-head">
+                            <div class="player-badge">P1</div>
+                            <div>
+                                <h2>Player 1</h2>
+                                <span class="status" id="p1-status">Waiting for answer</span>
+                            </div>
+                            <div class="live-score" id="p1-score">0</div>
+                        </div>
+
+                        <div class="options">
+                            <button class="option" data-player="1" data-option="A">
+                                <span class="letter">A</span>
+                                <span>Mercury</span>
+                            </button>
+                            <button class="option" data-player="1" data-option="B">
+                                <span class="letter">B</span>
+                                <span>Venus</span>
+                            </button>
+                            <button class="option" data-player="1" data-option="C">
+                                <span class="letter">C</span>
+                                <span>Mars</span>
+                            </button>
+                            <button class="option" data-player="1" data-option="D">
+                                <span class="letter">D</span>
+                                <span>Jupiter</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Player 2 Panel -->
+                    <div class="player-panel" id="player-2-panel">
+                        <div class="player-head">
+                            <div class="player-badge">P2</div>
+                            <div>
+                                <h2>Player 2</h2>
+                                <span class="status" id="p2-status">Waiting for answer</span>
+                            </div>
+                            <div class="live-score" id="p2-score">0</div>
+                        </div>
+
+                        <div class="options">
+                            <button class="option" data-player="2" data-option="A">
+                                <span class="letter">A</span>
+                                <span>Mercury</span>
+                            </button>
+                            <button class="option" data-player="2" data-option="B">
+                                <span class="letter">B</span>
+                                <span>Venus</span>
+                            </button>
+                            <button class="option" data-player="2" data-option="C">
+                                <span class="letter">C</span>
+                                <span>Mars</span>
+                            </button>
+                            <button class="option" data-player="2" data-option="D">
+                                <span class="letter">D</span>
+                                <span>Jupiter</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Player 3 Panel -->
+                    <div class="player-panel" id="player-3-panel">
+                        <div class="player-head">
+                            <div class="player-badge">P3</div>
+                            <div>
+                                <h2>Player 3</h2>
+                                <span class="status" id="p3-status">Waiting for answer</span>
+                            </div>
+                            <div class="live-score" id="p3-score">0</div>
+                        </div>
+
+                        <div class="options">
+                            <button class="option" data-player="3" data-option="A">
+                                <span class="letter">A</span>
+                                <span>Mercury</span>
+                            </button>
+                            <button class="option" data-player="3" data-option="B">
+                                <span class="letter">B</span>
+                                <span>Venus</span>
+                            </button>
+                            <button class="option" data-player="3" data-option="C">
+                                <span class="letter">C</span>
+                                <span>Mars</span>
+                            </button>
+                            <button class="option" data-player="3" data-option="D">
+                                <span class="letter">D</span>
+                                <span>Jupiter</span>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= RESULT SCREEN ================= -->
+        <section class="screen result-screen" style="display: none;">
+            <div class="result-card">
+                <div class="trophy">🏆</div>
+                <div class="eyebrow">GAME OVER</div>
+                <h1>Final Standings</h1>
+
+                <div class="leaderboard">
+                    <div class="leader-row">
+                        <div class="rank">🥇</div>
+                        <div class="rank-name">
+                            <strong>Player 2</strong>
+                            <span>Winner</span>
+                        </div>
+                        <div class="rank-score">800 <small>pts</small></div>
+                    </div>
+
+                    <div class="leader-row">
+                        <div class="rank">🥈</div>
+                        <div class="rank-name">
+                            <strong>Player 1</strong>
+                            <span>Runner Up</span>
+                        </div>
+                        <div class="rank-score">650 <small>pts</small></div>
+                    </div>
+
+                    <div class="leader-row">
+                        <div class="rank">🥉</div>
+                        <div class="rank-name">
+                            <strong>Player 3</strong>
+                            <span>3rd Place</span>
+                        </div>
+                        <div class="rank-score">400 <small>pts</small></div>
+                    </div>
+                </div>
+
+                <div class="result-actions">
+                    <button class="btn primary" id="restart-btn">Play Again</button>
+                </div>
+
+                <div class="review">
+                    <h2>Answer Breakdown</h2>
+                    <div class="review-tabs">
+                        <button class="active">Player 1</button>
+                        <button>Player 2</button>
+                        <button>Player 3</button>
+                    </div>
+
+                    <div class="review-row">
+                        <strong>Q1. Which is the hottest planet in our Solar System?</strong>
+                        <p>Your Answer: Venus <span class="ok">✓ Correct</span></p>
+                    </div>
+                    <div class="review-row">
+                        <strong>Q2. What is the largest planet in our Solar System?</strong>
+                        <p>Your Answer: Saturn <span class="bad">✗ Incorrect (Correct: Jupiter)</span></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
